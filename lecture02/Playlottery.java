@@ -1,0 +1,3 @@
+public stastic Play lottery {
+    
+}

@@ -1,0 +1,78 @@
+public class PalindromeChecker {
+    public static void main(String[] args) {
+        String str;
+        Scanner input = new Scanner(System.in);
+        str = input.next();
+
+        //Check the length of the string.
+        if (str.length() > 1000) {
+            System.out.println("The length of the input string exceeds 1000 and does not meet the requirement.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder(str);
+        sb.reverse();
+
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == sb.charAt(i)) {
+                count++;
+            }
+        }
+        if (count == str.length()) {
+            System.out.println("The string is a palindrome.");
+        } else {
+            System.out.println("The string is not a palindrome.");
+        }
+    }
+}
+
+public class DecimalDigits {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double inputNumber = scanner.nextDouble();
+
+        String outputDigits = extractDecimalDigits(inputNumber);
+        System.out.println(outputDigits);
+
+        scanner.close();
+    }
+
+    public static String extractDecimalDigits(double number) {
+
+        DecimalFormat df = new DecimalFormat("#.##########");
+        String numberStr = df.format(number);
+
+        int decimalIndex = numberStr.indexOf('.');
+
+        String decimalPart = numberStr.substring(decimalIndex + 1);
+
+        String padded = String.format("%-10s", decimalPart).replace(' ', '0');
+
+        String digits5To10 = padded.substring(4, 10);
+
+        return digits5To10.replaceFirst("^0+(?!$)", "");
+    }
+}
+
+public class Spheroid {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        //Remind user to enter equatorial radius(km) and polar radius(km)
+        System.out.print("Enter equatorial radius in km: ");
+        double a = scanner.nextDouble();
+        System.out.print("Enter polar radius in km: ");
+        double c = scanner.nextDouble();
+        
+        //calculate eccentricity
+        double eccentricity = Math.sqrt(1 - Math.pow(c, 2) / Math.pow(a, 2));
+        System.out.printf("Eccentricity = %.3f\n", eccentricity);
+
+        //calculate volume
+        double volume = (4.0 / 3) * Math.PI * Math.pow(a, 2) * c;
+        System.out.printf("Volume = %g cubic km\n", volume);
+
+        scanner.close();
+    }
+}

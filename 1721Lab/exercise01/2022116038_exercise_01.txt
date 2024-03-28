@@ -1,0 +1,43 @@
+public class CheckLeapYear {
+    public static void main(String[] args){
+        int year;
+        Scanner scanner = new Scanner(System.in);
+        year = scanner.nextInt();
+
+        if(year%4==0&&year%100!=0||year%400==0){
+            System.out.println("It is a leap year");
+        }
+
+        else{
+            System.out.println("It is not a leap year");
+        }
+    }
+}
+
+public class PrintTable {
+    public static void main(String[] args){
+        for(int i = 1; i <= 9; i++){
+            for(int j = 1; j <= i; j++) {
+                System.out.print(j+"x"+i+"="+i*j+"\t");
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class Weight {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter weight in kilograms: ");
+        double kilograms = scanner.nextDouble();
+
+        double totalPounds = kilograms * 2.20462;
+        int pounds = (int) totalPounds;
+
+        double decimalPounds = totalPounds - pounds;
+        double ounces = decimalPounds * 16;
+
+        System.out.printf("Equivalent imperial weight is %d lb %.1f oz", pounds, ounces);
+    }
+}
