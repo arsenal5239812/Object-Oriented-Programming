@@ -1,11 +1,12 @@
-import java.io.IOException;
-
 /**
  * Program to general a KML file from GPS track data stored in a file,
  * for the Advanced task of COMP1721 Coursework 1.
  *
  * @author Lirong Guo
  */
+
+import java.io.IOException;
+
 public class ConvertToKML {
   public static void main(String[] args) {
     if (args.length < 2) {

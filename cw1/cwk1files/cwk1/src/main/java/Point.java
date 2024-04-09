@@ -1,5 +1,10 @@
-import java.time.ZonedDateTime;
+/**
+ * Represents a point in space and time, recorded by a GPS sensor.
+ *
+ * @author Nick Efford & Lirong Guo
+ */
 
+import java.time.ZonedDateTime;
 import static java.lang.Math.abs;
 import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
@@ -7,12 +12,6 @@ import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toRadians;
 
-
-/**
- * Represents a point in space and time, recorded by a GPS sensor.
- *
- * @author Nick Efford & Lirong Guo
- */
 public class Point {
   private final ZonedDateTime timestamp;
   private final double longitude;

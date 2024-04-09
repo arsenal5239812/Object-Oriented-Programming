@@ -1,10 +1,11 @@
-import java.io.IOException;
-
 /**
  * Program to provide information on a GPS track stored in a file.
  *
  * @author Lirong Guo
  */
+
+import java.io.IOException;
+
 public class TrackInfo {
 
   public static void main(String[] args) {
