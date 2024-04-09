@@ -11,9 +11,13 @@ import static java.lang.Math.toRadians;
 /**
  * Represents a point in space and time, recorded by a GPS sensor.
  *
- * @author Nick Efford & YOUR NAME
+ * @author Nick Efford & Lirong Guo
  */
 public class Point {
+  private final ZonedDateTime timestamp;
+  private final double longitude;
+  private final double latitude;
+  private final double elevation;
   // Constants useful for bounds checking, etc
 
   private static final double MIN_LONGITUDE = -180.0;
@@ -23,16 +27,48 @@ public class Point {
   private static final double MEAN_EARTH_RADIUS = 6.371009e+6;
 
   // TODO: Create a stub for the constructor
+  public Point(ZonedDateTime ts, double lon, double lat, double elev) {
+    timestamp = ts;
+    longitude = lon;
+    latitude = lat;
+    elevation = elev;
 
+    // Validate longitude
+    if (longitude < MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
+      throw new GPSException("Longitude out of valid range: " + longitude);
+    }
+
+    // Validate latitude
+    if (latitude < MIN_LATITUDE || latitude > MAX_LATITUDE) {
+      throw new GPSException("Latitude out of valid range: " + latitude);
+    }
+  }
   // TODO: Create a stub for getTime()
-
+  public ZonedDateTime getTime() {
+    return timestamp;
+  }
   // TODO: Create a stub for getLatitude()
-
+  public double getLatitude() {
+    if (latitude < MIN_LATITUDE || latitude > MAX_LATITUDE) {
+      throw new GPSException("Invalid latitude: " + latitude);
+    }
+    return latitude;
+  }
   // TODO: Create a stub for getLongitude()
-
+  public double getLongitude() {
+    if (longitude < MIN_LONGITUDE || longitude > MAX_LONGITUDE) {
+      throw new GPSException("Invalid longitude: " + longitude);
+    }
+    return longitude;
+  }
   // TODO: Create a stub for getElevation()
-
+  public double getElevation() {
+    return elevation;
+  }
   // TODO: Create a stub for toString()
+  public String toString() {
+    return String.format("(%.5f, %.5f), %.1f m", longitude, latitude, elevation);
+  }
 
   // IMPORTANT: Do not alter anything beneath this comment!
 

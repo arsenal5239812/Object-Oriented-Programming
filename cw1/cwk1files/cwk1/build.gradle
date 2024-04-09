@@ -5,7 +5,7 @@ plugins {
   id 'checkstyle'
   id 'application'
   // Uncomment line below if using JavaFX for Advanced solution
-  //id 'org.openjfx.javafxplugin' version '0.0.13'
+  id 'org.openjfx.javafxplugin' version '0.0.13'
   id 'idea'
 }
 
@@ -27,10 +27,10 @@ dependencies {
 
 // Uncomment section below if using JavaFX for Advanced solution
 
-//javafx {
-//  version = '19'
-//  modules = [ 'javafx.controls' ]
-//}
+javafx {
+  version = '19'
+  modules = [ 'javafx.controls' ]
+}
 
 // Unit testing
 
@@ -48,7 +48,7 @@ checkstyle {
   showViolations false
 }
 
-task style {
+tasks.register('style') {
   group 'verification'
   description 'Runs checkstyle on code of this project.'
   dependsOn checkstyleMain
@@ -59,13 +59,18 @@ task style {
 idea {
   module {
     sourceDirs += file('src/main/java')
-    testSourceDirs += file('src/test/java')
+    sourceSets {
+      test {
+        java {
+          srcDirs 'src/test/java'
+        }
+      }
+    }
     inheritOutputDirs = false
     outputDir = file('build/classes/java/main')
-    testOutputDir file('build/classes/java/test')
+    testOutputDir = file('build/classes/java/test')
   }
 }
-
 // Running the applications
 
 application {
@@ -79,7 +84,7 @@ application {
   }
 }
 
-task runNoFile(type: JavaExec) {
+tasks.register('runNoFile', JavaExec) {
   group 'application'
   description 'Runs TrackInfo without an command line argument.'
   classpath = sourceSets.main.runtimeClasspath
@@ -90,7 +95,7 @@ task runNoFile(type: JavaExec) {
   }
 }
 
-task runKML(type: JavaExec) {
+tasks.register('runKML', JavaExec) {
   group 'application'
   description 'Runs ConvertToKML on a file specified as a command line argument.'
   classpath = sourceSets.main.runtimeClasspath
@@ -104,20 +109,20 @@ task runKML(type: JavaExec) {
 
 // Uncomment section below if using JavaFX for Advanced solution
 
-//task runPlot(type: JavaExec) {
-//  group 'application'
-//  description 'Runs ElevationPlot on a file specified as a command line argument.'
-//  classpath = sourceSets.main.runtimeClasspath
-//  mainClass = 'ElevationPlot'
-//  args 'data/walk.csv'
-//  doFirst {
-//    println "\nRunning ElevationPlot with walk.csv as a command line argument...\n"
-//  }
-//}
+tasks.register('runPlot', JavaExec) {
+  group 'application'
+  description 'Runs ElevationPlot on a file specified as a command line argument.'
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = 'ElevationPlot'
+  args 'data/walk.csv'
+  doFirst {
+    println "\nRunning ElevationPlot with walk.csv as a command line argument...\n"
+  }
+}
 
 // Generation of Zip file for submission
 
-task submission(type: Zip) {
+tasks.register('submission', Zip) {
   group 'Submission'
   description 'Generates Zip archive suitable for submission to Minerva.'
 
