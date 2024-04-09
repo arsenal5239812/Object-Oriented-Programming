@@ -55,6 +55,7 @@ tasks.register('style') {
 }
 
 // Support for IntelliJ
+// getTestSources()
 
 idea {
   module {
@@ -71,6 +72,7 @@ idea {
     testOutputDir = file('build/classes/java/test')
   }
 }
+
 // Running the applications
 
 application {

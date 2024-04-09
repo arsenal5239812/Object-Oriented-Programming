@@ -28,6 +28,9 @@ public class PlotApplication extends Application {
     LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
     lineChart.setTitle("Elevation Plot");
 
+    // Disable symbols on data points
+    lineChart.setCreateSymbols(false);
+
     XYChart.Series<Number, Number> series = new XYChart.Series<>();
     series.setName("walk.csv");
 
@@ -36,7 +39,9 @@ public class PlotApplication extends Application {
     Track track = new Track();
     try {
       track.readFile(filename);
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
+      // Handle IOException if file reading fails.
       System.err.println("Failed to read file: " + e.getMessage());
       System.exit(1);
     }

@@ -22,11 +22,16 @@ public class ConvertToKML {
       track.readFile(csvFilename);
       track.writeKML(kmlFilename);
       System.out.println("KML file created successfully.");
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
+      // Handle IO exceptions related to file reading/writing.
       System.out.println("Error reading from or writing to file: " + e.getMessage());
       System.exit(1);
-    } catch (RuntimeException e) {
+    }
+    catch (RuntimeException e) {
+      // Handle other runtime exceptions that may occur during processing.
       System.out.println("Error: " + e.getMessage());
+      // Terminate the program with an error status code.
       System.exit(1);
     }
   }

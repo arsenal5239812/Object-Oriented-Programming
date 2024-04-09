@@ -25,15 +25,25 @@ public class TrackInfo {
       System.out.println("Highest point is " + formatPoint(track.highestPoint()));
       System.out.printf("Total distance = %.3f km%n", track.totalDistance() / 1000);
       System.out.printf("Average speed = %.3f m/s%n", track.averageSpeed());
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
+      // Handle any IOExceptions that may occur during file reading.
       System.out.println("Error reading from file: " + e.getMessage());
       System.exit(1);
-    } catch (RuntimeException e) {
+    }
+    catch (RuntimeException e) {
+      // Handle other runtime exceptions that may occur.
       System.out.println("Error: " + e.getMessage());
       System.exit(1);
     }
   }
 
+  /**
+   * Formats a GPS point's longitude, latitude, and elevation into a string.
+   *
+   * @param point The GPS point to format.
+   * @return A formatted string representing the GPS point.
+   */
   private static String formatPoint(Point point) {
     return String.format("(%.5f, %.5f), %.1f m", point.getLongitude(),
             point.getLatitude(), point.getElevation());
