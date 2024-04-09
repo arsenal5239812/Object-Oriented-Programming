@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.io.PrintWriter;
 public class Track {
     // TODO: Create a stub for the constructor
     private final List<Point> points;
@@ -118,5 +119,26 @@ public class Track {
 
     public List<Point> getPoints() {
         return new ArrayList<>(points);
+    }
+
+    public void writeKML(String filename) throws IOException {
+        try (PrintWriter writer = new PrintWriter(filename)) {
+            writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            writer.println("<kml xmlns=\"http://www.opengis.net/kml/2.2\">");
+            writer.println("<Document>");
+            writer.println("<name>Your Track</name>");
+
+            for (Point point : points) {
+                writer.println("<Placemark>");
+                writer.println("<Point>");
+                writer.printf("<coordinates>%.6f,%.6f,%.1f</coordinates>%n",
+                        point.getLongitude(), point.getLatitude(), point.getElevation());
+                writer.println("</Point>");
+                writer.println("</Placemark>");
+            }
+
+            writer.println("</Document>");
+            writer.println("</kml>");
+        }
     }
 }
